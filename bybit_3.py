@@ -49,6 +49,37 @@ def place_spot_order(symbol: str,
 
     return client.place_order(**params)
 
+def get_open_ords(
+    category="spot",
+    symbol="USDCUSDT",
+    openOnly=0,
+    limit=1000,
+):
+    params = {
+        "category": category,
+        "symbol": symbol,
+        "openOnly": openOnly,
+        "limit": limit
+    }
+    return client.get_open_orders(**params)
+
+def cancel_order(
+    category='spot',
+    symbol='USDCUSDT', 
+    order_id=None, 
+    order_link_id=None
+    ):
+       
+    params = {
+        "category": category,
+        "symbol": symbol,
+        'orderId': order_id,
+        'orderLinkId': order_link_id
+    }
+    
+    # Отправка запроса на отмену ордера
+    return client.cancel_order(**params)
+
 print(client.get_open_orders(
     category="spot",
     symbol="USDCUSDT",
