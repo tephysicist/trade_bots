@@ -66,10 +66,9 @@ def get_open_ords(
 def cancel_order(
     category='spot',
     symbol='USDCUSDT', 
-    order_id=None, 
-    order_link_id=None
+    order_id=None
     ):
-       
+    order_link_id = str(int(order_id) + 1)
     params = {
         "category": category,
         "symbol": symbol,
