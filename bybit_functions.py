@@ -91,6 +91,16 @@ def get_publ_trade_history(
     }
     return client.get_public_trade_history(**params)
 
+def get_balance(
+    accountType="UNIFIED",
+    coin="USDT"
+):
+    params = {
+       "accountType": accountType,
+    "coin": coin 
+    }
+    return client.get_wallet_balance(**params)
+
 print(client.get_open_orders(
     category="spot",
     symbol="USDCUSDT",
