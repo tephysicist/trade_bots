@@ -97,6 +97,11 @@ print(client.get_fee_rates(
     symbol="USDCUSDT",
 ))
 
+print(client.get_option_delivery_price(
+    category="option",
+    symbol="ETH-26DEC22-1400-C",
+))
+
 if __name__ == "__main__":
     # Пример: Limit ордер — купить
     #res1 = place_spot_order(symbol="USDCUSDT", side="Buy", order_type="Limit", qty="100", price="0.1")
