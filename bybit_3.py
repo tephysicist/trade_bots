@@ -79,6 +79,18 @@ def cancel_order(
     # Отправка запроса на отмену ордера
     return client.cancel_order(**params)
 
+def get_publ_trade_history(
+    category='spot',
+    symbol='KASUSDT',
+    limit=1
+):
+    params = {
+        "category": category,
+        "symbol": symbol,
+        "limit": limit
+    }
+    return client.get_public_trade_history(**params)
+
 print(client.get_open_orders(
     category="spot",
     symbol="USDCUSDT",
