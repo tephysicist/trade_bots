@@ -54,6 +54,8 @@ def get_open_ords(
     symbol="USDCUSDT",
     openOnly=0,
     limit=1000,
+    Id=False,
+    info=False
 ):
     params = {
         "category": category,
@@ -61,19 +63,25 @@ def get_open_ords(
         "openOnly": openOnly,
         "limit": limit
     }
-    return client.get_open_orders(**params)
+    if Id:
+        lst = []
+        for i in client.get_open_orders(**params)['result']['list']:
+            lst.append(i['orderId'])
+        return lst
+    if info:
+        pass #return
+    else:
+        return client.get_open_orders(**params)
 
 def cancel_order(
     category='spot',
     symbol='USDCUSDT', 
     order_id=None
     ):
-    order_link_id = str(int(order_id) + 1)
     params = {
         "category": category,
         "symbol": symbol,
-        'orderId': order_id,
-        'orderLinkId': order_link_id
+        'orderId': order_id
     }
     
     # Отправка запроса на отмену ордера
