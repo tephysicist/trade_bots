@@ -6,7 +6,8 @@ API_SECRET = ''
 
 client = HTTP(api_key=API_KEY, api_secret=API_SECRET)
 
-def place_spot_order(symbol: str,
+def place_spot_order(category: str,
+                     symbol: str,
                      side: str,
                      order_type: str,
                      qty: str = None,
@@ -24,7 +25,7 @@ def place_spot_order(symbol: str,
     """
 
     params = {
-        "category": "spot",
+        "category": category,
         "symbol": symbol,
         "side": side,
         "orderType": order_type,
@@ -69,7 +70,13 @@ def get_open_ords(
             lst.append(i['orderId'])
         return lst
     if info:
-        pass #return
+        lst = []
+        for i in client.get_open_orders(**params)['result']['list']: # i is a dict
+            d = {}
+            keys_to_keep = ['symbol', 'orderId', 'takeProfit', 'side', 'qty', 'price']
+            d = {k: i[k] for k in keys_to_keep}
+            lst.append(d)
+        return lst
     else:
         return client.get_open_orders(**params)
 
